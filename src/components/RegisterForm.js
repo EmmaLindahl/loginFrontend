@@ -27,7 +27,7 @@ const RegisterForm = () =>{
             }
 
             setRegisterMessage(data.message)
-            navigate('/login')
+            // navigate('/login') It was not nice flow
             
 
         }catch(err){
