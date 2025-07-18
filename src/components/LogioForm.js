@@ -13,7 +13,7 @@ const LoginForm = () => {
 
         try{
             console.log(username, password)
-            const res = await fetch('http://localhost:5000/login', {
+            const res = await fetch('https://loginbackend-b3pq.onrender.com/login', {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"

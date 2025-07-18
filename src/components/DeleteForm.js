@@ -12,7 +12,7 @@ const DeleteForm = () =>{
         console.log(deleteUser, password)
         e.preventDefault();
         try{
-            const res = await fetch('http://localhost:5000/delete', {
+            const res = await fetch('https://loginbackend-b3pq.onrender.com/delete', {
                 method: "POST",
                 headers: {
                     "content-type": "application/json"
