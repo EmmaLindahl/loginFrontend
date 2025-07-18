@@ -27,6 +27,7 @@ const RegisterForm = () =>{
             }
 
             setRegisterMessage(data.message)
+            navigate('/login')
             
 
         }catch(err){
