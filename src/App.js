@@ -4,6 +4,7 @@ import Homepage from './components/Homepage';
 import LoginForm from './components/LogioForm';
 import RegisterForm from './components/RegisterForm';
 import DeleteForm from './components/DeleteForm';
+import Note from './components/Note'
 import './App.css';
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
           <Route path='/delete' element={<DeleteForm/>}/>
         </Routes>
       </Router>
+      <div className='flexWrapper'><Note/></div>
     </div>
   );
 }

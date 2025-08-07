@@ -1,3 +1,9 @@
+.flexWrapper{
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
 .loginpage{
   display: flex;
   justify-content: center;
@@ -91,4 +97,19 @@
 
 .button-87:active {
   transform: scale(0.95);
+}
+
+.warning{
+  display: flex;
+  justify-content: center;
+  border: 2px dashed #ecad24;
+  background-color: #ffe77f;
+  width: 750px;
+  padding: 1px;
+}
+
+.noteHeading {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 4px; /* optional spacing between icon and text */
 }
