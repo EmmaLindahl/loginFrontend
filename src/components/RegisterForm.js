@@ -6,6 +6,63 @@ const RegisterForm = () =>{
     const [newUser, setNewUser] = useState("")
     const [newPassword, setNewPassword] = useState("")
     const [registerMessage, setRegisterMessage] = useState("")
+    const [passwordStrenghMessage, setpasswordStrenghMessage] = useState({ line1: null, line2: null });
+
+    function checkCharacter(pass){
+        if (!pass) {
+        setpasswordStrenghMessage({ line1: null, line2: null });
+        return;
+    }
+        const testObject = {}
+
+        for(let i=0; i<pass.length; i++){
+        if(/[a-z]/.test(pass[i])){
+            testObject.checkLowercase = true
+        }else if(/[A-Z]/.test(pass[i])){
+            testObject.checkUppercase = true
+        }else if(/\d/.test(pass[i])){
+            testObject.checkNumber = true
+        }else{testObject.checkSpecialCharacter = true}
+
+        if (
+                testObject.checkLowercase &&
+                testObject.checkUppercase &&
+                testObject.checkNumber &&
+                testObject.checkSpecialCharacter
+            ) break;
+        }
+        setpasswordStrenghMessage(evaluateStrength(newPassword.length,Object.keys(testObject).length))
+    }
+
+    function evaluateStrength (length, types){
+        const messages = {
+            weak: "⚠️ Easy to Guess",
+            medium: "🔒 Decent",
+            strong: "✅ Strong"
+        };
+         const messages2 = {
+            weak: "Add more length or character types",
+            medium: "Add more length or character types",
+            strong: "Good mix of length and characters"
+        };
+
+        if (types === 1) {
+        if (length <= 9) return { line1: messages.weak, line2: messages2.weak };
+        return { line1: messages.medium, line2: messages2.medium };
+    } else if (types === 2) {
+        if (length <= 8) return { line1: messages.weak, line2: messages2.weak };
+        return { line1: messages.medium, line2: messages2.medium };
+    } else if (types === 3) {
+        if (length <= 7) return { line1: messages.weak, line2: messages2.weak };
+        if (length <= 10) return { line1: messages.medium, line2: messages2.medium };
+        return { line1: messages.strong, line2: messages2.strong };
+    } else if (types === 4) {
+        if (length <= 7) return { line1: messages.weak, line2: messages2.weak };
+        if (length <= 9) return { line1: messages.medium, line2: messages2.medium };
+        return { line1: messages.strong, line2: messages2.strong };
+    }
+}
+
 
     const handelRegister = async (e) => {
         e.preventDefault();
@@ -27,7 +84,6 @@ const RegisterForm = () =>{
             }
 
             setRegisterMessage(data.message)
-            // navigate('/login') It was not nice flow
             
 
         }catch(err){
@@ -53,9 +109,15 @@ const RegisterForm = () =>{
                     type="text"
                     placeholder="new password"
                     value={newPassword}
-                    onChange={(e) => setNewPassword(e.target.value)}
+                    onChange={(e) => {setNewPassword(e.target.value); checkCharacter(e.target.value)}}
                     required
                 />
+                {passwordStrenghMessage.line1 && (
+                    <p style={{ fontSize: '0.875rem', margin: '.5px' }}>
+                        {passwordStrenghMessage.line1}<br />
+                        {passwordStrenghMessage.line2}
+                    </p>
+                )}
                 <div style={{color: '#760000', fontSize: '0.875rem'}}>{registerMessage}</div>
                 <button type="submit" className="button-87">Create</button>
             </form>
